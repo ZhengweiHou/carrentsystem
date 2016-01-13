@@ -1,8 +1,8 @@
 package com.util;
 /**
  * 
- * HTML符号过滤类
- * @author Administrator
+ * HTML符号过滤类（将文本中的特殊字符转出来）
+ * @author HZW
  *
  */
 public final class Filter {

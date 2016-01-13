@@ -76,16 +76,16 @@ public class GuestBookAction extends HttpServlet {
 				String member=(String)session.getAttribute("member");
 				String nikename = Filter.escapeHTMLTags(request.getParameter("nikename").trim());
 				String face ="images/nobody.gif";
-				String email = Filter.escapeHTMLTags(request.getParameter("email").trim());
-				String qq = Filter.escapeHTMLTags(request.getParameter("qq").trim());
-				String weburl = Filter.escapeHTMLTags(request.getParameter("weburl").trim());
-				String blogurl = Filter.escapeHTMLTags(request.getParameter("blogurl").trim());
-				String expressions = "images/face/"+Filter.escapeHTMLTags(request.getParameter("face").trim())+".gif";
+//				String email = Filter.escapeHTMLTags(request.getParameter("email").trim());
+//				String qq = Filter.escapeHTMLTags(request.getParameter("qq").trim());
+//				String weburl = Filter.escapeHTMLTags(request.getParameter("weburl").trim());
+//				String blogurl = Filter.escapeHTMLTags(request.getParameter("blogurl").trim());
+//				String expressions = "images/face/"+Filter.escapeHTMLTags(request.getParameter("face").trim())+".gif";
 				String content = Filter.escapeHTMLTags(request.getParameter("content").trim());
 				String ip = request.getRemoteAddr();
 				 
-				int guestbook=1;
-				int flag = guestBookBean.addGuestBook(nikename, face, email, qq, weburl, blogurl, expressions, content, ip,guestbook);
+				int ifhide=0;//…Û∫À◊¥Ã¨ƒ¨»œŒ™Œ¥…Û∫À
+				int flag = guestBookBean.addGuestBook(nikename, face,  content, ip,ifhide);
 				if(flag == 1){
 					
 						request.setAttribute("message", "–ª–ªƒ˙µƒ¡Ù—‘£¨«Îµ»∫Úπ‹¿Ì‘±ªÿ∏¥£°");
@@ -175,6 +175,32 @@ public class GuestBookAction extends HttpServlet {
 				}catch(Exception e){
 					request.getRequestDispatcher("error.jsp").forward(request, response);
 				}
+			}
+			else if(method.equals("hideGuest")){
+				//…Û∫À¡Ù—‘
+				
+				try{
+					String username2 = (String)session.getAttribute("user");
+					if(username2 == null){
+						request.getRequestDispatcher("error.jsp").forward(request, response);
+					}
+					else{
+						int id = Integer.parseInt(request.getParameter("id"));
+						
+							int flag = guestBookBean.hideGuestBook(id);
+							if(flag == Constant.SUCCESS){
+								request.getRequestDispatcher(sysdir+"/guestbook/index.jsp").forward(request, response);
+							}
+							else{
+								request.setAttribute("message", "œµÕ≥Œ¨ª§÷–£¨«Î…‘∫Û‘Ÿ ‘£°");
+								request.getRequestDispatcher(sysdir+"/guestbook/index.jsp").forward(request, response);
+							}
+						
+					}
+				}catch(Exception e){
+					request.getRequestDispatcher("error.jsp").forward(request, response);
+				}
+				
 			}
 			else{
 				request.getRequestDispatcher("error.jsp").forward(request, response);

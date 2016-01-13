@@ -74,6 +74,21 @@ document.write('<div class="wrap">');
 </SCRIPT>
      <TABLE class=dragTable cellSpacing=0 cellPadding=0 width="100%" border=0>
 		<TBODY>
+				<TR>
+				<TD>
+					<TABLE class=dragTable height=28 cellSpacing=0 cellPadding=0
+						width=100% align=center background=<%=basePath%> images/head1.gif
+						border=0>
+						<TBODY>
+							<TR>
+								<TD align=left class=head><FONT color=#000000>您现在的位置：<SPAN
+										style="TEXT-DECORATION: none">新闻信息</FONT></TD>
+							</TR>
+						</TBODY>
+					</TABLE>
+				</TD>
+			</TR>
+		
         <TR>
           <TD class=head colspan="2">
 			<SPAN class=TAG>新闻信息</SPAN> 

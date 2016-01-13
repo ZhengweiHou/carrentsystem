@@ -1,3 +1,12 @@
+/* 导航条部分 */
+.nav{width:960px;height:29px;text-align:left;margin:20px auto 0;background:url("sp_nav.gif") repeat-x 0 -30px;position:relative;}
+.nav ul{margin-left:15%;}
+.nav ul li{float:left;width:auto;line-height:29px;display:inline;text-align:center;padding-left:5px;font-size:14px;font-weight:bold;background:url(/jscss/demoimg/201007/sp_nav.gif) no-repeat right -59px;}
+.nav ul li a{float:left;width:auto;color:#FFF;padding:0 20px;}
+.nav ul li.select{background:url("sp_nav.gif") no-repeat 0 -90px;position:relative;margin-top:-4px;}
+.nav ul li.select a{background:url("sp_nav.gif") no-repeat right -90px;height:33px;line-height:33px;color:#333;text-indent:-5px;}
+
+
 #listsp {
 	WIDTH: 99%
 }
@@ -19,3 +28,5 @@
 #spshow .about {
 	COLOR: #990000
 }
+
+

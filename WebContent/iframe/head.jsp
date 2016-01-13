@@ -20,10 +20,30 @@ List affList=abc.getAllAffiche();
 <META content="MSHTML 6.00.2900.3243" name=GENERATOR>
 <LINK href="<%=basePath %>images/css.css" type=text/css rel=stylesheet>
 <LINK href="<%=basePath %>images/default.css" type=text/css rel=stylesheet>
+
+<!-- //////////头文字特效////////// -->
+<style type="text/css">
+.milky {
+   text-transform: uppercase;
+  font-size: 20px;
+  color: #f1ebe5;
+  text-shadow: 0 8px 9px #c4b59d, 0px -2px 1px #fff;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(to bottom, #ece4d9 0%,#e9dfd1 100%);
+  border-radius: 5px; 
+  margin: 0;
+  padding: 0；
+  
+}
+</style>
+
+<!-- //////////////////// -->
 </HEAD>
 <SCRIPT language=JavaScript src="<%=basePath %>images/Common.js"></SCRIPT>
 <SCRIPT language=JavaScript src="<%=basePath %>images/index.js"></SCRIPT>
 <SCRIPT language=JavaScript src="<%=basePath %>images/calendar.js"></SCRIPT>
+<SCRIPT language=JavaScript src="<%=basePath %>images/jquery-1.9.0.js"></SCRIPT>
  
 <SCRIPT language=JavaScript>
 <!--//屏蔽出错代码
@@ -33,73 +53,63 @@ function killErr(){
 window.onerror=killErr;
 //-->
 </SCRIPT>
-<SCRIPT language=JavaScript>
-<!--//处理大分类一行两个小分类
-function autoTable(div){
-	fs=document.getElementById(div).getElementsByTagName("TABLE");
-	for(var i=0;i<fs.length;i++){
-		fs[i].style.width='49.5%';
-		if(i%2==1){
-			if (document.all) {
-				fs[i].style.styleFloat="right";
-			}else{
-				fs[i].style.cssFloat="right;";
-			}
-		}else{
-			if (document.all) {
-				fs[i].style.styleFloat="left";
-			}else{
-				fs[i].style.cssFloat="left;";
-			}
-		}
-	}
-}
-//-->
-</SCRIPT>
+
 <SCRIPT language=JavaScript src="images/inc.js"></SCRIPT>
 <SCRIPT language=JavaScript src="images/default.js"></SCRIPT>
 <SCRIPT language=JavaScript src="images/swfobject.js"></SCRIPT>
  
 <BODY text=#000000   leftMargin=0 topMargin=0>
-<SCRIPT language=JavaScript>
-<!--//目的是为了做风格方便
-document.write('<div class="wrap">');
-//-->
-</SCRIPT>
- 
-<TABLE id=header cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
-<TBODY>
-  <TR>
-    <TD><DIV class=ad id=banner><img src="images/a11.gif" width="950" height="90" border=0></DIV></TD>
-  </TR>
- </TBODY>
-</TABLE>
-<TABLE id=guide cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
-<TBODY>
-  <TR>
-    <TD align=middle>
+	<div align="center"><h1>欢迎使用HZW汽车租赁系统</h1></div>
+	
+	
 	<!--****************主菜单开始****************-->
-	
-	<A href="index.jsp" target="">首    页</A> |
-	<A href="qy.jsp" target="">企业介绍</A> |
-	<A href="news.jsp" target="">新闻信息</A> |
-	
-	<A href="nhzp.jsp" target="">车辆信息</A> |
-	<A href="guestbook.jsp" target="">投诉建议</A> |
-	<A href="admin/login.jsp" target="">管理员登陆</A> 
-	<!--****************主菜单结束****************-->
-	</TD><td>
-	<%
+	<div class="nav" align="center">
+	<ul>
+    	<li><a href="index.jsp" name="navurl" target="">首    页</a></li>
+        <li><a href="news.jsp" name="navurl" target="">新闻信息</a></li>
+        <li><a href="nhzp.jsp" name="navurl" target="">车辆信息</a></li>
+        <li><a href="guestbook.jsp" name="navurl" target="">投诉建议</a></li>
+        <!-- <li><a href="admin/login.jsp" target="">管理员登陆</a></li>  -->
+        <li style="margin-left: 20%;">  <%
 	String members=(String)session.getAttribute("member");
 	if(members==null){%>
-	<a href=<%=path+"/login.jsp"%> target="">会员登录</a>
+	<a name="navurl" style="color: red;" href=<%=path+"/login.jsp"%> target="">未登录
 	<% }else{%>
-	<a href="member/index.jsp" target="">欢迎<%=members%></a>
-	<%} %>
-	</td>
-  </TR>
-</TBODY>
-</TABLE>
+	<a style="color: blue;" href="member/index.jsp" target="">用户<%=members%>已登录
+	<%}%></a></li>
+        
+    </ul>
+   
+</div>
 
+	<!--****************主菜单结束****************-->
+	
+
+<script language="javascript">
+	function nav(){
+	   var url = document.URL;
+		var urls = document.getElementsByName("navurl");
+		for(var i=0;i<urls.length;i++){
+			if(urls[i] == url){
+				urls[i].parentNode.className = 'select';
+				return;
+			}
+		}
+		urls[0].parentNode.className = 'select';
+	}
+	nav();
+// jQuery	
+$(function(){
+	var a1 = document.URL;
+	var a2 = $(".nav_other a");
+	for(var i=0;i<a2.length;i++){
+		if(a2[i] == a1){
+			$(a2[i]).parent().addClass("select");
+			return;
+		}
+	}
+	$(a2[0]).parent().addClass("select");
+})
+</script>
 
 

@@ -5,6 +5,9 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String dir=sn.getDir();
+String thisurl = basePath+dir+"/guestbook/index.jsp";
+session.setAttribute("thisurl", thisurl);
+
 %>
 <HTML><HEAD><TITLE>后台操作区</TITLE>
 <LINK href="<%=basePath %><%=dir %>/images/Admin_Style.css" type=text/css rel=stylesheet>
@@ -18,85 +21,7 @@ BODY {
 .STYLE1 {color: #ECE9D8}
 </STYLE>
 </HEAD>
-<script type="text/JavaScript">
-function top(){
-   	form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page=1";
-    form3.submit();
-}
-function last(){
-    if(form3.pageCount.value==0){//如果总页数为0，那么最后一页为1，也就是第一页，而不是第0页
-    form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page=1";
-    form3.submit();
-	}else{
-	form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+form3.pageCount.value;
-    	form3.submit();
-	}
-}
-function pre(){
-  var page=parseInt(form3.page.value);
-  if(page<=1){
-    alert("已至第一页");
-  }else{
-    form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+(page-1);
-    form3.submit();
-  }
-}
 
-function next(){
-  var page=parseInt(form3.page.value);
-  var pageCount=parseInt(form3.pageCount.value);
-  if(page>=pageCount){
-    alert("已至最后一页");
-  }else{
-    form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+(page+1);
-    form3.submit();
-  }
-}
-function bjump(){
-  	var pageCount=parseInt(form3.pageCount.value);
-  	if( fIsNumber(form3.busjump.value,"1234567890")!=1 ){
-		alert("跳转文本框中只能输入数字!");
-		form3.busjump.select();
-		form3.busjump.focus();
-		return false;
-	}
-	if(form3.busjump.value>pageCount){//如果跳转文本框中输入的页数超过最后一页的数，则跳到最后一页
-	  if(pageCount==0){	
-	  form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page=1";
-	  form3.submit();
-	}
-	else{
-		form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+pageCount;
-		form3.submit();
-	}
-}
-else if(form3.busjump.value<=pageCount){
-var page=parseInt(form3.busjump.value);
-   if(page==0){
-      page=1;//如果你输入的是0，那么就让它等于1
-      form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+page;
-      form3.submit();
-   }else{
-      form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+page;
-      form3.submit();
-   }
-
-}
-
-}
-//****判断是否是Number.
-function fIsNumber (sV,sR){
-var sTmp;
-if(sV.length==0){ return (false);}
-for (var i=0; i < sV.length; i++){
-sTmp= sV.substring (i, i+1);
-if (sR.indexOf (sTmp, 0)==-1) {return (false);}
-}
-return (true);
-}
-
-
-</script>
 <%
 String message = (String)request.getAttribute("message");
 	if(message == null){
@@ -133,42 +58,24 @@ String message = (String)request.getAttribute("message");
 %>
 <BODY oncontextmenu="return false;" onselectstart="return false;" leftMargin=0 background=<%=basePath %><%=dir %>/images/MainBg.gif topMargin=0 scroll=no marginheight="0" marginwidth="0">
 
-	<script type="text/JavaScript">
-	function del()
-	{
-		
-		pageform.submit(); 
-	}
 	
-	function allch()
-	{
-		 var check = document.getElementsByName("checkit");
-		 for(var i = 0; i < check.length; i++){
-			 check[i].checked=document.getElementById("checkall").checked;
-		 }
-
-	}
-	</script>
 
 <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-  <TBODY>
-  <TR>
-    <TD align="left" vAlign=top >
+  <tbody>
+  <tr>
+    <td align="left" vAlign=top >
     <form action="<%=basePath %>GuestBook.do?method=delguestbook" method="post" name="pageform">
        <TABLE width="100%" border=0 align="center" cellPadding=3 cellSpacing=1 class=tablewidth>
-		  <TBODY>
+		  <tbody>
 		  <TR align="center" class=head>
-			<TD height=23>序号</TD>
-			<TD>昵称</TD>
-			<TD>邮箱</TD>
-			<TD>QQ</TD>
-			<TD>网址</TD>
-			<TD>博客网址</TD>
-			<TD>发帖时间</TD>
-			<TD>ip地址</TD>
-			 
-			<TD>选择</TD>
-		  </TR>
+			<td height=23>序号</td>
+			<td>昵称</td>
+			<td>内容概述</td>
+			<td>发帖时间</td>
+			<td>ip地址</td>
+			<td>审核状态</td>
+			<td>选择</td>
+		  </tr>
 		<%
 			lb.setEVERYPAGENUM(10);
 			int cou = lb.getMessageCountM(stime,etime);//得到信息总数			        
@@ -189,67 +96,168 @@ String message = (String)request.getAttribute("message");
 			<%
 				for(int i=0;i<pagelist3.size();i++){
 					List pagelist2 =(ArrayList)pagelist3.get(i);
+					String content = pagelist2.get(3).toString().trim();
+					String ifhide = pagelist2.get(7).toString();
 			%>   
 		  <TR align="center" bgColor=#ffffff>
-			<TD width="30" id=map><%=i+1 %></TD>
-			<TD id=map><a href="<%=basePath %><%=dir %>/guestbook/replay.jsp?id=<%=pagelist2.get(0).toString()%>"><%=pagelist2.get(1).toString() %></a></TD>
-			<TD id=map><A title="E_mail" href="mailto:<%=pagelist2.get(3).toString()%>"><%=pagelist2.get(3).toString() %></A></TD>
-			<TD id=map><A title="QQ:<%=pagelist2.get(4).toString()%>"  href="tencent://message/?uin=<%=pagelist2.get(4).toString()%>&Site=<%=sitename%>&Menu=yes"><%=pagelist2.get(4).toString() %></A></TD>
-			<TD id=map><A title="网址"  href="<%=pagelist2.get(5).toString()%>" target="_blank" ><%=pagelist2.get(5).toString() %></A></TD>
-			<TD id=map><A title="博客地址"  href="<%=pagelist2.get(6).toString()%>" target="_blank" ><%=pagelist2.get(6).toString() %></A></TD>
-			<TD id=map><%=pagelist2.get(9).toString() %></TD>
-			<TD id=map><%=pagelist2.get(10).toString() %></TD>
-			 
-			<TD id=map><input type="checkbox" name="checkit" value="<%=pagelist2.get(0).toString()%>"></TD>
-		  </TR>
+			<td width="30" id=map><%=i+1 %></td>
+			<td id=map><a href="<%=basePath %><%=dir %>/guestbook/replay.jsp?id=<%=pagelist2.get(0).toString()%>"><%=pagelist2.get(1).toString() %></a></td>
+			<td id=map><%=content.substring(0,content.length()>10?10:content.length()) %></td>
+			<td id=map><%=pagelist2.get(4).toString() %></td>
+			<td id=map><%=pagelist2.get(5).toString() %></td>
+			<td>
+				<a href="<%=basePath %>GuestBook.do?method=hideGuest&id=<%=pagelist2.get(0).toString()%>"><% if(ifhide.equals("1")){out.println("已审核");}else{out.println("未审核");}%></a>
+			</td>
+			<td id=map><input type="checkbox" name="checkit" value="<%=pagelist2.get(0).toString()%>"></td>
+		  </tr>
 		<%}%>    	
 		  <TR align="right" >
-			 <TD colspan="11" id=map>
+			 <td colspan="11" id=map>
 			 <input id="checkall" type="checkbox" name="checkall" onClick="allch()" >&nbsp;全选
-			 </TD>
-			 </TR>
-		
-		  </TBODY>
-      </TABLE></form>
-       </TD>
-		</TR>
-	     <TR>
-    	   <TD align="right" vAlign=top >
+			 </td>
+			 </tr>
+		  </tbody>
+      </table></form>
+       </td>
+		</tr>
+	     <tr>
+    	   <td align="right" vAlign=top >
              <TABLE width="100%" border=0 align="right" cellPadding=3 cellSpacing=1>
-		     <TBODY>
+		     <tbody>
 		     <TR align="right" class=head>
-			 <TD >
+			 <td >
 			 <form action="" method="post" name="form3">	
-			 <input type="hidden" name="pageCount" value="<%= session.getAttribute("busPageCount").toString()%>" /><!--//用于给上面javascript传值-->
-			 <input type="hidden" name="page" value="<%=session.getAttribute("busPage").toString()%>" /><!--//用于给上面javascript传值-->         
-							<a href="#" onClick="top()"><img src="<%=basePath %>images/first.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
-				<a href="#" onClick="pre()"><img src="<%=basePath %>images/pre.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
-				 共<%=session.getAttribute("busMessageCount").toString()%>条记录,共计<%=session.getAttribute("busPageCount").toString()%>页,当前第<%=session.getAttribute("busPage").toString()%>页&nbsp;&nbsp;&nbsp;
-				<a href="#" onClick="next()"><img src="<%=basePath %>images/next.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
-				<a href="#" onClick="last()"><img src="<%=basePath %>images/last.gif" border="0" /></a>
+			 <input type="hidden" name="pageCount" value="<%= session.getAttribute("busPageCount").toString()%>" /><!--//用于给javascript传值-->
+			 <input type="hidden" name="page" value="<%=session.getAttribute("busPage").toString()%>" /><!--//用于给javascript传值-->         
+				<a href="#" onClick="gotop()"><img src="<%=basePath %>images/first.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
+				<a href="#" onClick="dopre()"><img src="<%=basePath %>images/pre.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
+				 共<%=session.getAttribute("busMessageCount").toString()%>条记录,
+				 共计<%=session.getAttribute("busPageCount").toString()%>页,
+				 当前第<%=session.getAttribute("busPage").toString()%>页&nbsp;&nbsp;&nbsp;
+				<a href="#" onClick="donext()"><img src="<%=basePath %>images/next.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
+				<a href="#" onClick="golast()"><img src="<%=basePath %>images/last.gif" border="0" /></a>
 			 第<input name="busjump" type="text" size="3" />页<a href="#" onClick="bjump()"><img src="<%=basePath %>images/jump.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
 			 </form>
-             </TD>
-             </TR>
-			 </TBODY>
-			 </TABLE>
-		  </TD>
-		</TR>
-		<TR>
-    	   <TD align="center" vAlign=top >
+             </td>
+             </tr>
+			 </tbody>
+			 </table>
+		  </td>
+		</tr>
+		<tr>
+    	   <td align="center" vAlign=top >
              <TABLE width="100%" border=0 align="center" cellPadding=3 cellSpacing=1>
-		     <TBODY>
+		     <tbody>
 		     <TR align="center" class=head>
-			 <TD >
+			 <td >
 			 <input type="button" name="button" value="删除" onClick="del()" >
-			 </TD>
-			 </TR>
-			 </TBODY>
-			 </TABLE>
-		  </TD>
-		 </TR>
-  </TBODY>
-</TABLE>
-</BODY>
+			 </td>
+			 </tr>
+			 </tbody>
+			 </table>
+		  </td>
+		 </tr>
+  </tbody>
+</table>
+</body>
 <%} %>
 </HTML>
+
+
+<script type="text/JavaScript">
+	
+function del()
+{
+	pageform.submit(); 
+}
+
+function allch()
+{
+	 var check = document.getElementsByName("checkit");
+	 for(var i = 0; i < check.length; i++){
+		 check[i].checked=document.getElementById("checkall").checked;
+	 }
+}
+
+function gotop(){	//返回第一页
+	form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page=1";
+    form3.submit();
+}
+
+function golast(){ //返回最后一页
+    if(form3.pageCount.value==0){//如果总页数为0，那么最后一页为1，也就是第一页，而不是第0页
+    form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page=1";
+    form3.submit();
+	}else{
+	form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+form3.pageCount.value;
+    	form3.submit();
+	}
+}
+function dopre(){ //上一页
+  var page=parseInt(form3.page.value);
+  if(page<=1){
+    alert("已至第一页");
+  }else{
+    form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+(page-1);
+    form3.submit();
+  }
+}
+
+function donext(){//下一页
+  var page=parseInt(form3.page.value);
+  var pageCount=parseInt(form3.pageCount.value);
+  if(page>=pageCount){
+    alert("已至最后一页");
+  }else{
+    form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+(page+1);
+    form3.submit();
+  }
+}
+
+function bjump(){
+	var pageCount=parseInt(form3.pageCount.value);
+  	if(fIsNumber(form3.busjump.value,"1234567890")!=1 ){
+		alert("跳转文本框中只能输入数字!");
+		form3.busjump.select();
+		form3.busjump.focus();
+		return false;
+	}
+  	if(form3.busjump.value>pageCount){//如果跳转文本框中输入的页数超过最后一页的数，则跳到最后一页
+		if(pageCount==0){	
+	
+			var url = "<%=basePath%><%=dir %>/guestbook/index.jsp?page=1";
+			form3.action=url;
+			form3.submit();
+		}
+		else{
+			var url = "<%=basePath%><%=dir %>/guestbook/index.jsp?page="+pageCount;
+			form3.action=url;
+			form3.submit();
+		}	
+	}
+  	else if(form3.busjump.value<=pageCount){
+		var page=parseInt(form3.busjump.value);
+		if(page==0){
+	    	page=1;//如果你输入的是0，那么就让它等于1
+	    	form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+page;
+	    	form3.submit();
+   		}else{
+      		form3.action="<%=basePath%><%=dir %>/guestbook/index.jsp?page="+page;
+      		form3.submit();
+   		}
+	}	  	
+}
+
+//****判断是否是Number.
+function fIsNumber (sV,sR){
+	var sTmp;
+	if(sV.length==0){ return (false);}
+	for (var i=0; i < sV.length; i++){
+		sTmp= sV.substring (i, i+1);
+		if (sR.indexOf (sTmp, 0)==-1) {return (false);}
+	}
+	return (true);
+}
+	
+</script> 
+

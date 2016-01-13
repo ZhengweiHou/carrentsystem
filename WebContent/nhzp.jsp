@@ -84,8 +84,23 @@ String message = (String)request.getAttribute("message");
 document.write('<div class="wrap">');
 //-->
 </script>
-     <table class=dragtable cellSpacing=0 cellPadding=0 width="100%" border=0>
+     <table class=dragtable cellSpacing=0 cellPadding=0 width="100%" border=1>
 		<tbody>
+				<TR>
+				<TD>
+					<TABLE class=dragTable height=28 cellSpacing=0 cellPadding=0
+						width=100% align=center background=<%=basePath%> images/head1.gif
+						border=0>
+						<TBODY>
+							<TR>
+								<TD align=left class=head><FONT color=#000000>您现在的位置：<SPAN
+										style="TEXT-DECORATION: none">车辆信息</FONT></TD>
+							</TR>
+						</TBODY>
+					</TABLE>
+				</TD>
+			</TR>
+		
         <tr>
           <td class=head colspan="2">
 			<SPAN class=TAG>车辆信息</SPAN> 

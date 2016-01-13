@@ -68,15 +68,15 @@ public class GuestBookBean {
                     list2.add(rs.getString("id"));//0
     				list2.add(rs.getString("nickname"));//1
     				list2.add(rs.getString("pic"));//2
-    				list2.add(rs.getString("email"));//3
-    				list2.add(rs.getString("qq"));//4
-    				list2.add(rs.getString("weburl"));//5
-    				list2.add(rs.getString("blogurl"));//6
-    				list2.add(rs.getString("expressions"));//7
-    				list2.add(rs.getString("content"));//8
-    				list2.add(rs.getString("addtime"));//9
-    				list2.add(rs.getString("ip"));//10
-    				list2.add(rs.getString("replay"));//11
+//    				list2.add(rs.getString("email"));//3
+//    				list2.add(rs.getString("qq"));//4
+//    				list2.add(rs.getString("weburl"));//5
+//    				list2.add(rs.getString("blogurl"));//6
+//    				list2.add(rs.getString("expressions"));//7
+    				list2.add(rs.getString("content"));//3
+    				list2.add(rs.getString("addtime"));//4
+    				list2.add(rs.getString("ip"));//5
+    				list2.add(rs.getString("replay"));//6
     				list.add(list2);
                 } else {
                     break; //减少空循环的时间
@@ -151,16 +151,16 @@ public class GuestBookBean {
                     list2.add(rs.getString("id"));//0
     				list2.add(rs.getString("nickname"));//1
     				list2.add(rs.getString("pic"));//2
-    				list2.add(rs.getString("email"));//3
-    				list2.add(rs.getString("qq"));//4
-    				list2.add(rs.getString("weburl"));//5
-    				list2.add(rs.getString("blogurl"));//6
-    				list2.add(rs.getString("expressions"));//7
-    				list2.add(rs.getString("content"));//8
-    				list2.add(rs.getString("addtime"));//9
-    				list2.add(rs.getString("ip"));//10
-    				list2.add(rs.getString("replay"));//11
-    				list2.add(rs.getString("ifhide"));//12
+//    				list2.add(rs.getString("email"));//3
+//    				list2.add(rs.getString("qq"));//4
+//    				list2.add(rs.getString("weburl"));//5
+//    				list2.add(rs.getString("blogurl"));//6
+//    				list2.add(rs.getString("expressions"));//7
+    				list2.add(rs.getString("content"));//8-5
+    				list2.add(rs.getString("addtime"));//9-5
+    				list2.add(rs.getString("ip"));//10-5
+    				list2.add(rs.getString("replay"));//11-5
+    				list2.add(rs.getString("ifhide"));//12-5
     				list.add(list2);
                 } else {
                     break; //减少空循环的时间
@@ -206,9 +206,9 @@ public class GuestBookBean {
 		}
     }
 	//发表留言
-	public int addGuestBook(String nickname,String pic,String email,String qq,String weburl,String blogurl,String expressions,String content,String ip,int ifhide){
-		String sql = "insert into guestbook ( nickname, pic, email, qq, weburl, blogurl, expressions, content,addtime,ip,replay,ifhide)" +
-				" values('"+nickname+"','"+pic+"','"+email+"','"+qq+"','"+weburl+"','"+blogurl+"','"+expressions+"','"+content+"','"+date+"','"+ip+"','0','"+ifhide+"') ";
+	public int addGuestBook(String nickname,String pic,String content,String ip,int ifhide){
+		String sql = "insert into guestbook ( nickname, pic, content,addtime,ip,replay,ifhide)" +
+				" values('"+nickname+"','"+pic+"','"+content+"','"+date+"','"+ip+"','0','"+ifhide+"') ";
 		DBO dbo = new DBO();
 		dbo.open();
 		try{

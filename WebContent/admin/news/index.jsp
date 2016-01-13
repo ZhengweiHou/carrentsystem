@@ -26,11 +26,11 @@ BODY {
 </STYLE>
 	</HEAD>
 	<script language="javascript">
-function top(){
+function gotop(){
    	form3.action="<%=basePath%>admin/news/index.jsp?page=1";
     form3.submit();
 }
-function last(){
+function golast(){
     if(form3.pageCount.value==0){//如果总页数为0，那么最后一页为1，也就是第一页，而不是第0页
     form3.action="<%=basePath%>admin/news/index.jsp?page=1";
     form3.submit();
@@ -39,7 +39,7 @@ function last(){
     	form3.submit();
 	}
 }
-function pre(){
+function dopre(){
   var page=parseInt(form3.page.value);
   if(page<=1){
     alert("已至第一页");
@@ -49,7 +49,7 @@ function pre(){
   }
 }
 
-function next(){
+function donext(){
   var page=parseInt(form3.page.value);
   var pageCount=parseInt(form3.pageCount.value);
   if(page>=pageCount){
@@ -209,11 +209,11 @@ function del()
 	 <form action="" method="post" name="form3">	
 	 <input type="hidden" name="pageCount" value="<%= session.getAttribute("busPageCount").toString()%>" /><!--//用于给上面javascript传值-->
 	 <input type="hidden" name="page" value="<%=session.getAttribute("busPage").toString()%>" /><!--//用于给上面javascript传值-->         
-					<a href="#" onClick="top()"><img src="<%=basePath %>images/first.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
-		<a href="#" onClick="pre()"><img src="<%=basePath %>images/pre.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
+					<a href="#" onClick="gotop()"><img src="<%=basePath %>images/first.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
+		<a href="#" onClick="dopre()"><img src="<%=basePath %>images/pre.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
 		 共<%=session.getAttribute("busMessageCount").toString()%>条记录,共计<%=session.getAttribute("busPageCount").toString()%>页,当前第<%=session.getAttribute("busPage").toString()%>页&nbsp;&nbsp;&nbsp;
-		<a href="#" onClick="next()"><img src="<%=basePath %>images/next.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
-		<a href="#" onClick="last()"><img src="<%=basePath %>images/last.gif" border="0" /></a>
+		<a href="#" onClick="donext()"><img src="<%=basePath %>images/next.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
+		<a href="#" onClick="golast()"><img src="<%=basePath %>images/last.gif" border="0" /></a>
 	 第<input name="busjump" type="text" size="3" />页<a href="#" onClick="bjump()"><img src="<%=basePath %>images/jump.gif" border="0" /></a>&nbsp;&nbsp;&nbsp;
 	 </form>
            </TD>
