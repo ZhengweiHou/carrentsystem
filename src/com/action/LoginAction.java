@@ -115,7 +115,7 @@ public class LoginAction extends HttpServlet {
 					session.setAttribute("member", username);
 					session.setAttribute("type", reg_type);
 					session.setAttribute("info", info);
-					request.getRequestDispatcher("member/index.jsp").forward(request, response);
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 				else{
 					session.setAttribute("member", username);

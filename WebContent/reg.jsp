@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html;charset=gb2312" %>
 <%@ include file="iframe/head.jsp" %>
+<div class="wrap">
 <TABLE class=MainTable cellSpacing=0 cellPadding=0 width="100%" align=center 
 border=0>
   <TBODY>
@@ -32,7 +33,7 @@ border=0>
                                 <TR>
                                   <TD>
                     <DIV style="SCROLLBAR-FACE-COLOR: #d5d4d4; SCROLLBAR-HIGHLIGHT-COLOR: #ffffff; OVERFLOW: auto; WIDTH: 920px; SCROLLBAR-SHADOW-COLOR: #ffffff; SCROLLBAR-3DLIGHT-COLOR: #adadad; SCROLLBAR-ARROW-COLOR: #adadad; SCROLLBAR-TRACK-COLOR: #ffffff; SCROLLBAR-DARKSHADOW-COLOR: #adadad; HEIGHT: 395px" align=left>
-                                      <P>1.<%=sysList.get(0).toString().trim() %>服务条款的确认和接受</P>
+                                    <P>1.<%=sysList.get(0).toString().trim() %>服务条款的确认和接受</P>
                                 <P><%=sysList.get(0).toString().trim() %>的各项网络服务的所有权和运营权归网站名称所有。<%=sysList.get(0).toString().trim() %>依照本服务条款及其不时发布的操作规则提供网络服务，此外，当服务使用者（以下称“用户”）使用<%=sysList.get(0).toString().trim() %>各项分类服务时，用户应当同意本服务条款的全部内容并遵守与该项服务相关的规则与要点。前述所有规则与要点均构成本服务条款的一部分。用户必须完全同意所有服务条款并完成注册程序，才能成为<%=sysList.get(0).toString().trim() %>的正式用户。 
                                   </P>
                                 <P>2.服务说明</P>
@@ -132,4 +133,5 @@ border=0>
 		</TR>
 		</TBODY>
 		</TABLE>
+		</div>
 <%@ include file="iframe/foot.jsp"%>

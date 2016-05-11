@@ -79,7 +79,7 @@ function expand(id_value){
     </TABLE>
   </TD>
   </TR>
-    <TR ParentID="SystemLastArticle" AllParentID="SystemLastArticle">
+    <%-- <TR ParentID="SystemLastArticle" AllParentID="SystemLastArticle">
   <TD noWrap width="35%">
   <TABLE width="100%" border="0" align="center"style="cursor:hand" onclick=javascript:expand(1)>
     <TR>
@@ -87,7 +87,7 @@ function expand(id_value){
     <TD background="<%=basePath %>member/images/linkbg1.gif" ><a href="<%=basePath %>member/info/<%=url %>" target="MainFrame">ĞŞ¸ÄÏêÏ¸×ÊÁÏ</a></TD></TR>
     </TABLE>
   </TD>
-  </TR>
+  </TR> --%>
   <TR ParentID="SystemLastArticle" AllParentID="SystemLastArticle">
   <TD noWrap width="35%">
   <TABLE width="100%" border="0" align="center"style="cursor:hand" onclick=javascript:expand(2)>

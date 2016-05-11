@@ -134,7 +134,7 @@ String message = (String)request.getAttribute("message");
 								  <A class=dhx12 href=""></A>
 								  </TD>
                                   <TD vAlign=center>
-									<A href="lost.jsp">找回密码</A> <A href="<%=basePath %>reg.jsp">用户注册</A>
+									<!-- <A href="lost.jsp">找回密码</A> --> <A href="<%=basePath %>reg.jsp">用户注册</A>
 								</TD>
 								</TR>
 							  <TR>

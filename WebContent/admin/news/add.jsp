@@ -76,7 +76,8 @@ String message = (String)request.getAttribute("message");
   </tr>
    
   <tr bgcolor='#FFFFFF'> 
-    <td colspan="2" valign="top" align=center><TEXTAREA style="display:none" NAME="content" ROWS="20" COLS="70"><%=content %></TEXTAREA>	
+    <td colspan="2" valign="top" align=center>
+    <TEXTAREA style="display:none" NAME="content" ROWS="20" COLS="70"><%=content %></TEXTAREA>	
 	  <FCK:editor id="infoContent" basePath="/carrentsystem/FCKeditor/"
               width="550"
               height="400"

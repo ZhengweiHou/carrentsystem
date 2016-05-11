@@ -41,7 +41,7 @@ String message = (String)request.getAttribute("message");
 	    String str = list2.get(0).toString();
 %>
 
-<BODY  oncontextmenu="return false;" onselectstart="return false;" leftMargin=0 background=<%=basePath %><%=dir %>/images/MainBg.gif topMargin=0 scroll=no marginheight="0" marginwidth="0">
+<BODY  oncontextmenu="return false;" onselectstart="return false;" leftMargin=0 topMargin=0 scroll=no marginheight="0" marginwidth="0">
  <br><br><br><br><br><p align=center><font color=red><strong><%=str %></strong></font>
 </BODY>
 <%} %>

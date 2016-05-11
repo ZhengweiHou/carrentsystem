@@ -3,7 +3,6 @@
   <tbody>
   <tr>
     <td align="center">
-      haha
 	</td>
    </tr>
   </tbody>
@@ -13,13 +12,13 @@
   <tr>
     <td align=middle>
 	<div align=center>
-	  建议使用IE6.0或以上版本浏览 </div>
+	  Copyright@2007-2016 HZWCarrentSystem </div>
     </td>
  </tr>
 </tbody>
 </table>
 <script language=Javascript>
-<!--//目的是为了做风格方便
+<!--//鐩殑鏄负浜嗗仛椋庢牸鏂逛究
 document.write('</div>');
 //-->
 </script>

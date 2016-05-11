@@ -66,6 +66,7 @@ window.onerror=killErr;
 	<div class="nav" align="center">
 	<ul>
     	<li><a href="index.jsp" name="navurl" target="">首    页</a></li>
+    	<li><a href="qy.jsp" name="navurl" target="">企业介绍</a></li>	
         <li><a href="news.jsp" name="navurl" target="">新闻信息</a></li>
         <li><a href="nhzp.jsp" name="navurl" target="">车辆信息</a></li>
         <li><a href="guestbook.jsp" name="navurl" target="">投诉建议</a></li>
